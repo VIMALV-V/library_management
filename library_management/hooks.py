@@ -5,6 +5,52 @@ app_description = "Library Management System built with Frappe"
 app_email = "vimal137msd@gmail.com"
 app_license = "mit"
 
+
+
+# -------------------------
+# Document Events
+# -------------------------
+
+doc_events = {
+    "Book Issue": {
+        "validate": "library_management.events.check_book",
+        "on_update": "library_management.events.book_issue_updated"
+    }
+}
+
+
+# -------------------------
+# Scheduler Events
+# -------------------------
+
+scheduler_events = {
+    "daily": [
+        "library_management.tasks.check_overdue_books"
+    ]
+}
+
+
+app_include_js = "custom_desk.bundle.js"
+
+
+doc_events = {
+    "ToDo": {
+        "validate": "library_management.api.todo_validate"
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 # Apps
 # ------------------
 
