@@ -1,6 +1,6 @@
 import frappe
 from frappe.utils import today, getdate
-
+from frappe.query_builder import DocType
 
 @frappe.whitelist()
 def check_book_status(book):
@@ -66,3 +66,44 @@ def create_task(task_subject):
 @frappe.whitelist()
 def todo_validate(doc, method):
     frappe.msgprint("Hook executed!")
+
+
+
+
+
+@frappe.whitelist()
+def document_api_demo():
+
+    Book = DocType("Book")
+    Category = DocType("Category")
+
+    books = (
+        frappe.qb.from_(Book)
+        .join(Category)
+        .on(Book.category == Category.name)
+        .select(
+            Book.name,
+            Book.book_title,
+            Category.category_name
+        )
+        .limit(5)
+    ).run(as_dict=True)
+
+    
+    if books:
+        book = frappe.get_doc("Book", books[0]["name"])
+
+        book.available = "Available"
+
+        book.save()
+
+    
+    for b in books:
+        frappe.db.set_value(
+            "Book",
+            b["name"],
+            "available",
+            "Available"
+        )
+
+    return books
