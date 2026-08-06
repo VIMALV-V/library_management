@@ -15,9 +15,11 @@ doc_events = {
     "Book Issue": {
         "validate": "library_management.events.check_book",
         "on_update": "library_management.events.book_issue_updated"
+    },
+    "ToDo": {
+        "validate": "library_management.api.todo_validate"
     }
 }
-
 
 # -------------------------
 # Scheduler Events
@@ -25,7 +27,8 @@ doc_events = {
 
 scheduler_events = {
     "daily": [
-        "library_management.tasks.check_overdue_books"
+        "library_management.tasks.check_overdue_books",
+        "library_management.tasks.daily_maintenance"
     ]
 }
 
@@ -33,11 +36,7 @@ scheduler_events = {
 app_include_js = "custom_desk.bundle.js"
 
 
-doc_events = {
-    "ToDo": {
-        "validate": "library_management.api.todo_validate"
-    }
-}
+
 
 
 
