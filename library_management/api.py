@@ -2,6 +2,10 @@ import frappe
 from frappe.utils import today, getdate
 from frappe.query_builder import DocType
 
+import os
+import barcode
+from barcode.writer import ImageWriter
+
 @frappe.whitelist()
 def check_book_status(book):
     """
@@ -107,3 +111,30 @@ def document_api_demo():
         )
 
     return books
+
+
+@frappe.whitelist()
+def generate_barcode(book_name):
+    code128 = barcode.get("code128", book_name, writer=ImageWriter())
+
+    file_name = f"{book_name}.png"
+
+    output_path = os.path.join(
+        frappe.get_site_path("public", "files"),
+        book_name
+    )
+
+    code128.save(output_path)
+
+    file_url = f"/files/{file_name}"
+
+    frappe.db.set_value(
+        "Book",
+        book_name,
+        "barcode_image",
+        file_url
+    )
+
+    frappe.db.commit()
+
+    return file_url
