@@ -138,3 +138,26 @@ def generate_barcode(book_name):
     frappe.db.commit()
 
     return file_url
+
+
+@frappe.whitelist()
+def todo_api_demo():
+
+    todos = frappe.get_list(
+        "ToDo",
+        fields=["name", "description", "owner"],
+        order_by="creation desc",
+        limit=5
+    )
+
+    for todo in todos:
+        todo["email"] = frappe.db.get_value(
+            "User",
+            todo["owner"],
+            "email"
+        )
+
+    return {
+        "timestamp": frappe.utils.now(),
+        "records": todos
+    }
