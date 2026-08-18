@@ -1,9 +1,9 @@
 import click
 
 
-@click.command()
-def hello():
-    print("Hello from the custom Bench CLI!")
+@click.command("hello-app")
+def hello_app():
+    print("Hello from custom command!")
 
 
-commands = [hello]
+commands = [hello_app]
