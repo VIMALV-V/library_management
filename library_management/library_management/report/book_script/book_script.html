@@ -1,0 +1,39 @@
+<div class="container">
+
+    <h3>Book Script Report</h3>
+
+    <table class="table table-bordered">
+
+        <thead>
+
+            <tr>
+
+                <th>Book</th>
+                <th>Author</th>
+                <th>Status</th>
+
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+        <% for(var i=0;i<data.length;i++){ %>
+
+            <tr>
+
+                <td><%= data[i].book_title %></td>
+
+                <td><%= data[i].author %></td>
+
+                <td><%= data[i].status %></td>
+
+            </tr>
+
+        <% } %>
+
+        </tbody>
+
+    </table>
+
+</div>
