@@ -5,20 +5,16 @@
     <table class="table table-bordered">
 
         <thead>
-
             <tr>
-
                 <th>Book</th>
                 <th>Author</th>
-                <th>Status</th>
-
+                <th>Published Date</th>
             </tr>
-
         </thead>
 
         <tbody>
 
-        <% for(var i=0;i<data.length;i++){ %>
+        <% for (var i = 0; i < data.length; i++) { %>
 
             <tr>
 
@@ -26,7 +22,7 @@
 
                 <td><%= data[i].author %></td>
 
-                <td><%= data[i].status %></td>
+                <td><%= dateutil.str_to_user(data[i].published_date) %></td>
 
             </tr>
 

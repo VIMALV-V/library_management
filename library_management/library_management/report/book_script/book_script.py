@@ -2,32 +2,30 @@
 # For license information, please see license.txt
 
 # import frappe
-
 import frappe
 
 
 def execute(filters=None):
-
     columns = [
         {
             "label": "Book",
             "fieldname": "book_title",
             "fieldtype": "Data",
-            "width": 200
+            "width": 200,
         },
         {
             "label": "Author",
             "fieldname": "author",
             "fieldtype": "Link",
             "options": "Author",
-            "width": 150
+            "width": 150,
         },
         {
-            "label": "Status",
-            "fieldname": "status",
-            "fieldtype": "Data",
-            "width": 120
-        }
+            "label": "Published Date",
+            "fieldname": "published_date",
+            "fieldtype": "Date",
+            "width": 140,
+        },
     ]
 
     data = frappe.get_all(
@@ -35,9 +33,9 @@ def execute(filters=None):
         fields=[
             "book_title",
             "author",
-            "status"
+            "published_date",
         ],
-        limit=10
+        limit=10,
     )
 
     return columns, data
