@@ -4,7 +4,7 @@ app_publisher = "Vimal"
 app_description = "Library Management System built with Frappe"
 app_email = "vimal137msd@gmail.com"
 app_license = "mit"
-
+fixtures = ["Client Script"]
 
 
 # -------------------------
