@@ -1,0 +1,20 @@
+{% extends "templates/web.html" %}
+
+{% block page_content %}
+
+<div class="container">
+
+    <h1>{{ title }}</h1>
+
+    <ul>
+        {% for user in users %}
+            <li>
+                <strong>{{ user.full_name }}</strong>
+                - {{ user.email }}
+            </li>
+        {% endfor %}
+    </ul>
+
+</div>
+
+{% endblock %}
