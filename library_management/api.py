@@ -161,3 +161,24 @@ def todo_api_demo():
         "timestamp": frappe.utils.now(),
         "records": todos
     }
+@frappe.whitelist(allow_guest=True)
+def limited_greeting():
+    logger = frappe.logger()
+    logger.info("Endpoint called.")
+
+    ip_address = frappe.local.request.remote_addr
+    cache_key = f"limited_greeting:{ip_address}"
+
+    cache = frappe.cache()
+    count = cache.incr(cache_key)
+
+    if count == 1:
+        cache.expire(cache_key, 60)
+
+    if count > 5:
+        logger.info("Rate limit exceeded.")
+        frappe.local.response.http_status_code = 429
+        frappe.response["message"] = "Rate limit exceeded."
+        return
+
+    frappe.response["message"] = "Hello, Rate Limited World!"
