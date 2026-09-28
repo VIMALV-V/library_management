@@ -1,0 +1,21 @@
+{% extends "templates/web.html" %}
+
+{% block page_content %}
+
+<div class="container">
+    <h1>Latest News</h1>
+
+    <ul>
+        {% for article in articles %}
+            <li>
+                <a href="/articles/{{ article.name }}">
+                    {{ article.title }}
+                </a>
+            </li>
+        {% else %}
+            <li>No published articles available.</li>
+        {% endfor %}
+    </ul>
+</div>
+
+{% endblock %}
